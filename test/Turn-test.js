@@ -42,7 +42,7 @@ describe('Turn', function() {
   });
 
   it.skip('should evaluate guess to be true or false', function() {
-
+    
   })
 
   it.skip('should should be able to give feedback on guess', function() {
