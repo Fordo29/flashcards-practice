@@ -12,6 +12,20 @@ class Turn {
     return this.card;
   }
 
-  
+  evaluateGuess() {
+    if (this.guess === this.card.correctAnswer) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  giveFeedback() {
+    const correct = this.evaluateGuess();
+    if (correct) {
+      return "correct!";
+    } else {
+      return "incorrect!";
+    }
+  }
 }
 module.exports = Turn;
