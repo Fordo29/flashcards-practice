@@ -4,16 +4,15 @@ const Card = require('../src/Card');
 class Round {
     constructor(deck) {
         this.deck = deck.cards;
-        // this.turn = new Turn("object", card);
         this.turns = 0;
         this.incorrectGuesses = [];
+        this.currentCard = deck.cards[0];
     }
 
     returnCurrentCard() {
-        console.log(this.deck.cards);
-        return this.deck.cards[0];
+        return this.currentCard;
     }
 
-    
+
 }
 module.exports = Round;
