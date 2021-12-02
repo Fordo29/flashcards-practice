@@ -19,9 +19,9 @@ class Turn {
       return false;
     }
   }
+
   giveFeedback() {
-    const correct = this.evaluateGuess();
-    if (correct) {
+    if (this.evaluateGuess()) {
       return "correct!";
     } else {
       return "incorrect!";

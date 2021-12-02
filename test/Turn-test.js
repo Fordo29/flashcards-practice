@@ -52,14 +52,19 @@ describe('Turn', function() {
 
   it('should evaluateGuess function to return a boolean', function () {
     expect(turn.evaluateGuess()).to.be.a('boolean');
-  })
+  });
 
-  it('should evaluateGuess function to return a correct boolean value', function() {
+  it('should evaluateGuess function returns if the guess was right or wrong', function() {
     expect(turn.evaluateGuess()).to.equal(true);
   });
 
-  it('should be able to give feedback on guess', function() {
+  it('should be able to give feedback on incorrect guess', function() {
     const turn = new Turn('function', card);
     expect(turn.giveFeedback()).to.equal("incorrect!");
-  })
+  });
+
+  it('should be able to give feedback on correct guess', function() {
+    const turn = new Turn('object', card);
+    expect(turn.giveFeedback()).to.equal("correct!");
+  });
 });
