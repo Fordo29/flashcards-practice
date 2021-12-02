@@ -8,29 +8,30 @@ const data = require('../src/data')
 
 
 describe('Deck', function() {
-  let card;
-  let turn;
-  let deck;
-
-  beforeEach(function() {
-    card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    turn = new Turn('object', card);
-    deck = new Deck(data.prototypeData);
-  });
+  // let deck;
+  //
+  // beforeEach(function() {
+  //   const deck = new Deck(data.prototypeData);
+  // });
 
   it('should be a function', function() {
+    const deck = new Deck(data.prototypeData);
     expect(Deck).to.be.a('function');
   });
 
   it('should be an instance of Deck', function() {
+    const deck = new Deck(data.prototypeData);
     expect(deck).to.be.an.instanceof(Deck);
   });
 
   it('should store the array of cards', function() {
+    const deck = new Deck(data.prototypeData);
     expect(deck.cards).to.be.an('array');
   });
 
   it('should count the cards in the Deck', function() {
+    const deck = new Deck(data.prototypeData);
+    deck.instatiateCards(data.prototypeData);
     expect(deck.countCards()).to.equal(30);
   });
 });

@@ -58,8 +58,9 @@ describe('Round Class Methods', function() {
     round = new Round(deck);
     });
 
-  it('should return the current being played', function() {
-    expect(round.returnCurrentCard()).to.equal(data.prototypeTestData[0]);
+  it('should return the current card being played', function() {
+    round.returnCurrentCard();
+    expect(round.currentCard).to.equal(deck.cards[round.turns]);
   });
 
   it('should increase turns count by one', function() {
@@ -72,14 +73,18 @@ describe('Round Class Methods', function() {
     expect(round.turn).to.be.an('object');
   });
 
-  it('should update the next card to be the current card', function() {
-    round.takeTurn('object');
-    expect(round.currentCard).to.equal(data.prototypeTestData[1]);
+  it('should go on to the next card for the next turn', function() {
+    round.takeTurn('array');
+    expect(round.currentCard).to.equal(deck.cards[round.turns]);
   });
 
   it('should update and store incorrect guesses in an array', function() {
+    round.takeTurn('object');
+    expect(round.incorrectGuesses.length).to.equal(0);
     round.takeTurn('function');
     expect(round.incorrectGuesses.length).to.equal(1);
+    round.takeTurn('function');
+    expect(round.incorrectGuesses.length).to.equal(2);
   });
 
   it('should give feedback indicating the guess is wrong', function() {
@@ -87,7 +92,7 @@ describe('Round Class Methods', function() {
     expect(round.turn.giveFeedback()).to.equal("incorrect!");
   });
 
-  it('should give feedback indicating the guess is wrong', function() {
+  it('should give feedback indicating the guess is correct', function() {
     round.takeTurn('object');
     expect(round.turn.giveFeedback()).to.equal("correct!");
   });
@@ -98,7 +103,7 @@ describe('Round Class Methods', function() {
     expect(round.calculatePercentCorrect()).to.equal(50);
   });
 
-  it('should end round and display percent correct guesses', function() {
+  it('should end the round and show the user the percent correct', function() {
     round.takeTurn('object');
     round.takeTurn('what?');
     round.calculatePercentCorrect();
