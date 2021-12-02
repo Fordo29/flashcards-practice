@@ -77,19 +77,31 @@ describe('Round Class Methods', function() {
     expect(round.currentCard).to.equal(data.prototypeTestData[1]);
   });
 
-  it.skip('should update and store incorrect guesses in an array', function() {
-
+  it('should update and store incorrect guesses in an array', function() {
+    round.takeTurn('function');
+    expect(round.incorrectGuesses.length).to.equal(1);
   });
 
-  it.skip('should store the percent correct guesses', function() {
-
+  it('should give feedback indicating the guess is wrong', function() {
+    round.takeTurn('function');
+    expect(round.turn.giveFeedback()).to.equal("incorrect!");
   });
 
-  it.skip('should end round and display precent correct guesses', function() {
-
+  it('should give feedback indicating the guess is wrong', function() {
+    round.takeTurn('object');
+    expect(round.turn.giveFeedback()).to.equal("correct!");
   });
 
-  it.skip('should ', function() {
+  it('should store the percent correct guesses', function() {
+    round.takeTurn('object');
+    round.takeTurn('what?');
+    expect(round.calculatePercentCorrect()).to.equal(50);
+  });
 
+  it('should end round and display percent correct guesses', function() {
+    round.takeTurn('object');
+    round.takeTurn('what?');
+    round.calculatePercentCorrect();
+    expect(round.endRound()).to.equal('** Round over! ** You answered 50% of the questions correctly!');
   });
 });
