@@ -4,10 +4,10 @@ const expect = chai.expect;
 const Turn = require('../src/Turn');
 const Card = require('../src/Card');
 const Deck = require('../src/Deck');
-const data = require('../src/data');
+const data = require('../src/test-data');
 const Round = require('../src/Round');
 
-describe('Round', function() {
+describe('Round Class Properties', function() {
   let card;
   let turn;
   let deck;
@@ -16,7 +16,7 @@ describe('Round', function() {
   beforeEach(function() {
     card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     turn = new Turn('object', card);
-    deck = new Deck(data.prototypeData);
+    deck = new Deck(data.prototypeTestData);
     round = new Round(deck);
   });
 
@@ -32,6 +32,10 @@ describe('Round', function() {
     expect(round.deck).to.be.an('array');
   });
 
+  it('should store a a deck of cards', function() {
+    expect(round.deck).to.deep.equal(deck.cards);
+  });
+
   it('should have a property of turns that starts at a default of zero', function() {
     expect(round.turns).to.equal(0);
   });
@@ -39,36 +43,53 @@ describe('Round', function() {
   it('should store an array of incorrect guesses as an array', function() {
     expect(round.incorrectGuesses).to.be.an('array');
   });
+});
+
+describe('Round Class Methods', function() {
+  let card;
+  let turn;
+  let deck;
+  let round;
+
+  beforeEach(function() {
+    card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    turn = new Turn('object', card);
+    deck = new Deck(data.prototypeTestData);
+    round = new Round(deck);
+    });
 
   it('should return the current being played', function() {
-    expect(round.returnCurrentCard()).to.equal(card);
+    expect(round.returnCurrentCard()).to.equal(data.prototypeTestData[0]);
   });
 
-  it.skip('should increase turns count by one', function() {
-    
+  it('should increase turns count by one', function() {
+    round.takeTurn('object');
+    expect(round.turns).to.equal(1);
   });
 
-  it.skip('should create a new instance of Turn', function() {
-    
+  it('should create a new instance of Turn', function() {
+    round.takeTurn('object');
+    expect(round.turn).to.be.an('object');
   });
 
-  it.skip('should update the next card to be the current card', function() {
-    
+  it('should update the next card to be the current card', function() {
+    round.takeTurn('object');
+    expect(round.currentCard).to.equal(data.prototypeTestData[1]);
   });
 
-    it.skip('should update and store incorrect guesses in an array', function() {
-    
+  it.skip('should update and store incorrect guesses in an array', function() {
+
   });
 
   it.skip('should store the percent correct guesses', function() {
-    
+
   });
 
   it.skip('should end round and display precent correct guesses', function() {
-    
+
   });
 
   it.skip('should ', function() {
-    
+
   });
 });
