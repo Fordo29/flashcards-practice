@@ -72,7 +72,6 @@ describe('Round Class Methods', function() {
   });
 
   it('should give feedback indicating the guess is correct', function() {
-
     expect(round.takeTurn('object')).to.equal("correct!");
   });
 
