@@ -16,8 +16,8 @@ describe('Game Class Properties', function() {
   let game;
 
   beforeEach(function() {
-    card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    turn = new Turn('object', card);
+    // card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    // turn = new Turn('object', card);
     deck = new Deck(data.prototypeTestData);
     round = new Round(deck);
     game = new Game();
@@ -35,12 +35,13 @@ describe('Game Class Properties', function() {
     expect(game.start).to.be.a('function');
   });
 
-  it('should create cards at the start of the game', function() {
-    expect(game.currentRound.deck.cards[0]).to.be.a(Card);
+  it.skip('should create cards at the start of the game', function() {
+    expect(game.currentRound).to.be.anInstanceOf(Round);
   });
 
   it.skip('should create a new round at the start of the game', function() {
-    expect(game.round).to.be.anInstanceOf(Round);
+    game.start();
+    expect(game.round).to.be.instanceOf(Round);
   });
 
 });
