@@ -31,7 +31,6 @@ describe('Deck', function() {
 
   it('should count the cards in the Deck', function() {
     const deck = new Deck(data.prototypeData);
-    deck.instatiateCards(data.prototypeData);
     expect(deck.countCards()).to.equal(30);
   });
 });

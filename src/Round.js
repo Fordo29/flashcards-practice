@@ -4,37 +4,32 @@ const Deck = require('../src/Deck');
 
 class Round {
     constructor(deck) {
-        this.deck = deck.cards;
+        this.deck = deck;
         this.turns = 0;
         this.incorrectGuesses = [];
-        this.currentCard = deck.cards[0];
-        this.turn;
-        this.percentCorrect = 0;
     }
 
     returnCurrentCard() {
-        return this.currentCard[this.turns];
+        return this.deck.cards[this.turns];
     }
 
     takeTurn(guess) {
+      const turn = new Turn(guess, this.deck.cards[this.turns]);
       this.turns++;
-      this.turn = new Turn(guess, this.currentCard);
-      this.currentCard = this.deck[this.turns];
 
-      const answer = this.turn.evaluateGuess();
-      if(!answer) {
-        this.incorrectGuesses.push(this.currentCard.id);
+      if(!turn.evaluateGuess()) {
+        this.incorrectGuesses.push(this.deck.cards[this.turns].id);
       }
-      this.turn.giveFeedback(answer);
+      return turn.giveFeedback();
     }
 
     calculatePercentCorrect() {
-      this.percentCorrect = Math.round(((this.turns - this.incorrectGuesses.length) / this.turns) * 100);
-      return this.percentCorrect
+      return Math.round(((this.turns - this.incorrectGuesses.length) / this.turns) * 100);
     }
 
     endRound() {
-      return `** Round over! ** You answered ${this.percentCorrect}% of the questions correctly!`;
+      this.turns = 0;
+      console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`);
     }
 }
 module.exports = Round;
